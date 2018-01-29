@@ -1,10 +1,8 @@
 'use strict'
 class Deck {
   constructor (deck) {
-    if (deck.targets.quantity + deck.modifiers.quantity > deck.deckSize)
-      console.error('Error: invalid deck specified')
     this.debug = deck.debug
-    this.simulationCount = deck.debug ? 10 : 1e6
+    this.simulationCount = deck.debug ? 10 : 1e4
     this.originalDeck = deck
     this.results = []
   }
@@ -76,6 +74,7 @@ class Deck {
             // Make sure this modifier cannot be applied again
             this.deck.modifiers[key].positions[i] = this.deck.deckSize + 1
 
+            // apply must be run again incase another modifier now needs to be applied
             return
           }
         }
